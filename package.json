@@ -1,0 +1,25 @@
+{
+  "name": "input-integer",
+  "version": "0.0.0",
+  "description": "ui component",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://tarek994.github.io/input-integer/"
+  },
+  "keywords": [
+    "slider"
+  ],
+  "author": "wizardamigos",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://tarek994.github.io/input-integer/"
+  },
+  "homepage": "https://tarek994.github.io/input-integer/",
+  "dependencies": {
+    "budo": "^11.8.4"
+  }
+}
