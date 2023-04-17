@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://tarek994.github.io/input-integer/"
+    "url": "git+https://github.com/Tarek994/input-integer.git"
   },
   "keywords": [
     "slider"
@@ -18,10 +18,10 @@
   "author": "wizardamigos",
   "license": "MIT",
   "bugs": {
-    "url": "https://tarek994.github.io/input-integer/"
+    "url": "https://github.com/Tarek994/input-integer/issues"
   },
   "homepage": "https://tarek994.github.io/input-integer/",
-  "dependencies": {
+  "devDependencies": {
     "budo": "^11.8.4"
   }
 }
