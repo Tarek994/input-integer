@@ -33,3 +33,10 @@ function get_theme(){
    }
    `
 }
+
+function handle_onkeyup (e, input) {
+  console.log(e.target.value)
+  const val = Number(e.target.value)
+  if(val > input.max) input.value = 150
+  else if (val < input.min) input.value = 0
+}
