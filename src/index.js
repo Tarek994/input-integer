@@ -8,9 +8,15 @@ sheet.replaceSync(theme)
 function inputInteger() {
   const el = document.createElement("div")
   const shadow = el.attachShadow({ mode: "closed" })
-  shadow.innerHTML = `
-  <input></input>
-  `
+  
+  const input = document.createElement('input')
+  input.type = 'number'
+  input.min = 0
+  input.max = 150
+  input.onkeyup = (e) => handle_onkeyup(e, input)
+
+  shadow.append(input)
+
   shadow.adoptedStyleSheets = [sheet]
   return el
 }
