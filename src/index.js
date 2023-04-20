@@ -11,9 +11,9 @@ function inputInteger(opts) {
 
   const input = document.createElement('input')
   input.type = 'number'
-  input.min = 0
-  input.max = 150
-  input.onkeyup = (e) => handle_onkeyup(e, input)
+  input.min = min //opts.min
+  input.max = max //opts.max
+  input.onkeyup = (e) => handle_onkeyup(e, input , min , max)
   shadow.append(input)
   shadow.adoptedStyleSheets = [sheet]
   return el
