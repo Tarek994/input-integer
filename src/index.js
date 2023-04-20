@@ -4,7 +4,8 @@ const sheet = new CSSStyleSheet
 const theme = get_theme()
 sheet.replaceSync(theme)
 
-function inputInteger() {
+function inputInteger(opts) {
+  const {min, max} = opts
   const el = document.createElement("div")
   const shadow = el.attachShadow({ mode: "closed" })
 
