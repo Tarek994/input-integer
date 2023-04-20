@@ -60,9 +60,9 @@ function get_theme () {
   `
 }
 
-function handle_onkeyup(e, input) {
+function handle_onkeyup(e, input, min, max) {
   console.log(e.target.value)
   const val = Number(e.target.value)
-  if (val > input.max) input.value = 150
-  else if (val < input.min) input.value = 0
+  if (val > max) input.value = max
+  else if (val < min) input.value = min
 }
