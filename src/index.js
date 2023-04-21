@@ -14,6 +14,9 @@ function inputInteger(opts) {
   input.min = min //opts.min
   input.max = max //opts.max
   input.onkeyup = (e) => handle_onkeyup(e, input , min , max)
+  input.onmouseleave = (e) => handle_onmouseleave_and_blur(e, input , min)
+  input.onblur = (e) => handle_onmouseleave_and_blur(e, input , min)
+
   shadow.append(input)
   shadow.adoptedStyleSheets = [sheet]
   return el
@@ -66,6 +69,12 @@ function handle_onkeyup(e, input, min, max) {
   const val_len = val.toString().length
   const min_len = min.toString().length
 
-  if (val > max) input.value = max
-  else if (val_len === min_len && val < min) input.value = min
+  if (val > max) input.value = ''
+  else if (val_len === min_len && val < min) input.value = ''
+}
+
+
+function handle_onmouseleave_and_blur (e, input, min){
+  const val = Number(e.target.value)
+  if( val < min ) input.value = '' 
 }
