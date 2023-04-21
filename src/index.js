@@ -63,6 +63,9 @@ function get_theme () {
 function handle_onkeyup(e, input, min, max) {
   console.log(e.target.value)
   const val = Number(e.target.value)
+  const val_len = val.toString().length
+  const min_len = min.toString().length
+
   if (val > max) input.value = max
-  else if (val < min) input.value = min
+  else if (val_len === min_len && val < min) input.value = min
 }
