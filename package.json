@@ -1,5 +1,5 @@
 {
-  "name": "input-integer",
+  "name": "input-integer_tar",
   "version": "0.0.0",
   "description": "ui component",
   "main": "src/index.js",
