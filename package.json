@@ -23,5 +23,8 @@
   "homepage": "https://tarek994.github.io/input-integer/",
   "devDependencies": {
     "budo": "^11.8.4"
+  },
+  "dependencies": {
+    "input-integer_tar": "^0.0.0"
   }
 }
