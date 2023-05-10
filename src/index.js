@@ -5,6 +5,11 @@ const theme = get_theme()
 sheet.replaceSync(theme)
 
 var id = 0
+
+function inputInteger(opts, protocol) {
+  const { min = 0, max = 1000 } = opts
+  const name = `input-integer-${id++}`
+
   const el = document.createElement("div")
   const shadow = el.attachShadow({ mode: "closed" })
 
