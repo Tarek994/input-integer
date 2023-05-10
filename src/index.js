@@ -10,6 +10,8 @@ function inputInteger(opts, protocol) {
   const { min = 0, max = 1000 } = opts
   const name = `input-integer-${id++}`
 
+  const notify = protocol({ from: name }, listen)
+
   const el = document.createElement("div")
   const shadow = el.attachShadow({ mode: "closed" })
 
