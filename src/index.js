@@ -1,5 +1,6 @@
 module.exports = inputInteger
 
+
 const sheet = new CSSStyleSheet
 const theme = get_theme()
 sheet.replaceSync(theme)
@@ -12,6 +13,13 @@ function inputInteger(opts, protocol) {
 
   const notify = protocol({ from: name }, listen)
 
+  function listen(message) {
+    const { type, data } = message
+    if (type === 'update') {
+      input.value = data
+    }
+  }
+
   const el = document.createElement("div")
   const shadow = el.attachShadow({ mode: "closed" })
 
@@ -19,9 +27,9 @@ function inputInteger(opts, protocol) {
   input.type = 'number'
   input.min = min //opts.min
   input.max = max //opts.max
-  input.onkeyup = (e) => handle_onkeyup(e, input , min , max)
-  input.onmouseleave = (e) => handle_onmouseleave_and_blur(e, input , min)
-  input.onblur = (e) => handle_onmouseleave_and_blur(e, input , min)
+  input.onkeyup = (e) => handle_onkeyup(e, input, min, max)
+  input.onmouseleave = (e) => handle_onmouseleave_and_blur(e, input, min)
+  input.onblur = (e) => handle_onmouseleave_and_blur(e, input, min)
 
   shadow.append(input)
   shadow.adoptedStyleSheets = [sheet]
@@ -30,27 +38,27 @@ function inputInteger(opts, protocol) {
   // handler
 
   function handle_onkeyup(e, input, min, max) {
-  console.log(e.target.value)
-  const val = Number(e.target.value)
+    console.log(e.target.value)
+    const val = Number(e.target.value)
 
-  const val_len = val.toString().length
-  const min_len = min.toString().length
+    const val_len = val.toString().length
+    const min_len = min.toString().length
 
-  if (val > max) input.value = ''
-  else if (val_len === min_len && val < min) input.value = ''
+    if (val > max) input.value = ''
+    else if (val_len === min_len && val < min) input.value = ''
 
-  notify({type: 'update', body: val})
+    notify({ from: name, type: 'update', data: val })
+
+  }
+
+  function handle_onmouseleave_and_blur(e, input, min) {
+    const val = Number(e.target.value)
+    if (val < min) input.value = ''
+  }
 
 }
 
-function handle_onmouseleave_and_blur (e, input, min){
-  const val = Number(e.target.value)
-  if( val < min ) input.value = '' 
-}
-
-}
-
-function get_theme () {
+function get_theme() {
   return `
     :host {
       --b: 0, 0%;
