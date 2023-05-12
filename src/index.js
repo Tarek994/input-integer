@@ -44,8 +44,8 @@ function inputInteger(opts, protocol) {
     const val_len = val.toString().length
     const min_len = min.toString().length
 
-    if (val > max) input.value = ''
-    else if (val_len === min_len && val < min) input.value = ''
+    if (val > max) input.value = max
+    else if (val_len === min_len && val < min) input.value = min
 
     notify({ from: name, type: 'update', data: val })
 
