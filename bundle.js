@@ -38,12 +38,26 @@ document.body.append(page)
 },{"..":2}],2:[function(require,module,exports){
 module.exports = inputInteger
 
+
 const sheet = new CSSStyleSheet
 const theme = get_theme()
 sheet.replaceSync(theme)
 
-function inputInteger(opts) {
-  const {min, max} = opts
+var id = 0
+
+function inputInteger(opts, protocol) {
+  const { min = 0, max = 1000 } = opts
+  const name = `input-integer-${id++}`
+
+  const notify = protocol({ from: name }, listen)
+
+  function listen(message) {
+    const { type, data } = message
+    if (type === 'update') {
+      input.value = data
+    }
+  }
+
   const el = document.createElement("div")
   const shadow = el.attachShadow({ mode: "closed" })
 
@@ -51,16 +65,38 @@ function inputInteger(opts) {
   input.type = 'number'
   input.min = min //opts.min
   input.max = max //opts.max
-  input.onkeyup = (e) => handle_onkeyup(e, input , min , max)
-  input.onmouseleave = (e) => handle_onmouseleave_and_blur(e, input , min)
-  input.onblur = (e) => handle_onmouseleave_and_blur(e, input , min)
+  input.onkeyup = (e) => handle_onkeyup(e, input, min, max)
+  input.onmouseleave = (e) => handle_onmouseleave_and_blur(e, input, min)
+  input.onblur = (e) => handle_onmouseleave_and_blur(e, input, min)
 
   shadow.append(input)
   shadow.adoptedStyleSheets = [sheet]
   return el
+
+  // handler
+
+  function handle_onkeyup(e, input, min, max) {
+    console.log(e.target.value)
+    const val = Number(e.target.value)
+
+    const val_len = val.toString().length
+    const min_len = min.toString().length
+
+    if (val > max) input.value = max
+    else if (val_len === min_len && val < min) input.value = min
+
+    notify({ from: name, type: 'update', data: val })
+
+  }
+
+  function handle_onmouseleave_and_blur(e, input, min) {
+    const val = Number(e.target.value)
+    if (val < min) input.value = ''
+  }
+
 }
 
-function get_theme () {
+function get_theme() {
   return `
     :host {
       --b: 0, 0%;
@@ -101,19 +137,5 @@ function get_theme () {
   `
 }
 
-function handle_onkeyup(e, input, min, max) {
-  console.log(e.target.value)
-  const val = Number(e.target.value)
-  const val_len = val.toString().length
-  const min_len = min.toString().length
 
-  if (val > max) input.value = ''
-  else if (val_len === min_len && val < min) input.value = ''
-}
-
-
-function handle_onmouseleave_and_blur (e, input, min){
-  const val = Number(e.target.value)
-  if( val < min ) input.value = '' 
-}
 },{}]},{},[1]);
